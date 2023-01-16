@@ -1,0 +1,31 @@
+.header{
+ background-color: rgb(137, 48, 41);
+}
+
+.navigation{
+ display: flex;
+ flex-direction: row;
+ margin: auto;
+ align-items: center;
+ width: 1500px;
+ background-color: rgb(137, 48, 41);
+
+ &__container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+ }
+
+ &__links__container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 200px;
+ }
+
+ &__links{
+  text-decoration: none;
+  color: black;
+ }
+}

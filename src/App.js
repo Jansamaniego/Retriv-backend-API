@@ -1,25 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from 'react';
+import {
+  Routes,
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from 'react-router-dom';
+import Navigation from './components/navigation/Navigation';
+import { useDispatch } from 'react-redux';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+import './app.module.scss';
+import {
+  createUserDocumentFromAuth,
+  onAuthStateChangedListener,
+} from './utils/firebase/firebase';
+import { setCurrentUser } from './store/user/userAction';
+import Authentication from './routes/authentication/Authentication';
+import RootLayout from './layouts/RootLayout';
+import Home from './routes/home/Home';
+import SignUpForm from './components/signUpForm/SignUpForm';
+import SignInForm from './components/signInForm/SignInForm';
+
+const App = (props) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChangedListener((user) => {
+      console.log(user, 'auth listener fired');
+      if (user) {
+        createUserDocumentFromAuth(user);
+      }
+      dispatch(setCurrentUser(user));
+    });
+
+    return unsubscribe;
+  }, []);
+
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<RootLayout />}>
+        <Route index element={<Home />} />
+        <Route path="auth" element={<Authentication />}>
+          <Route path="signup" element={<SignUpForm />} />
+          <Route path="signin" element={<SignInForm />} />
+        </Route>
+      </Route>
+    )
   );
-}
+
+  return <RouterProvider router={router} />;
+};
 
 export default App;
