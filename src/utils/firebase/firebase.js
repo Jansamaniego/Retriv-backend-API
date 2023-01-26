@@ -17,6 +17,8 @@ import {
   collection,
   getDocs,
   deleteDoc,
+  writeBatch,
+  query,
 } from 'firebase/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -120,12 +122,10 @@ export const addProduct = async (product) => {
 
 export const getProducts = async () => {
   const productsCollectionRef = collection(db, 'products');
-  try {
-    const products = await getDocs(productsCollectionRef);
-    return products;
-  } catch (error) {
-    console.log('fetching products failed', error);
-  }
+  const q = query(productsCollectionRef);
+
+  const products = await getDocs(q);
+  return products.docs.map((docSnapshot) => docSnapshot.data());
 };
 
 export const getProduct = async (productId) => {
@@ -151,4 +151,20 @@ export const editProduct = async (productId, productNewValues) => {
 export const deleteProduct = async (productId) => {
   const deletedProduct = await deleteDoc(doc(db, 'products', productId));
   return deletedProduct;
+};
+
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const collectionRef = collection(db, collectionKey);
+  const batch = writeBatch(db);
+
+  objectsToAdd.forEach((object) => {
+    const docRef = doc(collectionRef);
+    batch.set(docRef, object);
+  });
+
+  await batch.commit();
+  console.log('done');
 };

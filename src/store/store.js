@@ -6,6 +6,7 @@ import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 
 import { userReducer } from './user/userReducer';
+import { productsReducer } from './product/productReducer';
 import { rootReducer } from './rootReducer';
 
 const middleWares = [
@@ -29,6 +30,13 @@ const composeEnhancer = compose;
 
 const composedEnhancers = composeEnhancer(applyMiddleware(...middleWares));
 
-export const store = createStore(rootReducer, undefined, composedEnhancers);
+// export const store = createStore(rootReducer, undefined, composedEnhancers);
 
 // export const persistor = persistStore(store);
+
+export const store = configureStore({
+  reducer: {
+    user: userReducer,
+    products: productsReducer,
+  },
+});
