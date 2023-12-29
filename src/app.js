@@ -45,6 +45,8 @@ app.use(mongoSanitize());
 app.use(cookieParser());
 app.use(cors({ credentials: true, origin: config.client.url }));
 
+console.log(config.client.url);
+
 // Compress a compresssible response body
 app.use(compression());
 
