@@ -86,6 +86,8 @@ export const googleCallback = catchAsync(async (req, res) => {
     domain: config.client.url
   });
 
+  console.log(res.cookie);
+
   return res.redirect(config.client.url);
 });
 
