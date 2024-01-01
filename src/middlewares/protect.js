@@ -15,7 +15,7 @@ import { User } from '../models/index';
 const protect = catchAsync(async (req, res, next) => {
   // 1) Getting the token
 
-  console.log(req.cookies, 'cookies baby');
+  console.log(req.cookies, 'cookies baby hello');
 
   const token = req.cookies.access_token;
 
