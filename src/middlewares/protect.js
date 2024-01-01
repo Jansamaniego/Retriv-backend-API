@@ -17,8 +17,6 @@ const protect = catchAsync(async (req, res, next) => {
 
   const token = req.cookies.access_token;
 
-  
-
   // 2) Check if token does not exist
   if (!token) {
     return next(

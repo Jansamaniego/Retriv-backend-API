@@ -29,18 +29,10 @@ export const signUp = catchAsync(async (req, res) => {
     });
   }
 
-  const { accessToken, refreshToken } = tokens;
-
-  res.cookie('access_token', accessToken, accessTokenCookieOptions);
-  res.cookie('refresh_token', refreshToken, refreshTokenCookieOptions);
-  res.cookie('logged_in', true, {
-    ...accessTokenCookieOptions,
-    httpOnly: false
-  });
-
   return res.status(statusCode).json({
     type,
     message,
+    tokens,
     user
   });
 });
@@ -60,18 +52,10 @@ export const signIn = catchAsync(async (req, res) => {
     });
   }
 
-  const { accessToken, refreshToken } = tokens;
-
-  res.cookie('access_token', accessToken, accessTokenCookieOptions);
-  res.cookie('refresh_token', refreshToken, refreshTokenCookieOptions);
-  res.cookie('logged_in', true, {
-    ...accessTokenCookieOptions,
-    httpOnly: false
-  });
-
   return res.status(statusCode).json({
     type,
     message,
+    tokens,
     user
   });
 });
@@ -133,18 +117,10 @@ export const refreshTokens = catchAsync(async (req, res) => {
     });
   }
 
-  const { accessToken, refreshToken } = tokens;
-
-  res.cookie('access_token', accessToken, accessTokenCookieOptions);
-  res.cookie('refresh_token', refreshToken, refreshTokenCookieOptions);
-  res.cookie('logged_in', true, {
-    ...accessTokenCookieOptions,
-    httpOnly: false
-  });
-
   return res.status(statusCode).json({
     type,
-    message
+    message,
+    tokens
   });
 });
 
