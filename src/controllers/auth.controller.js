@@ -127,6 +127,10 @@ export const refreshTokens = catchAsync(async (req, res) => {
     });
   }
 
+  const { accessToken } = tokens;
+
+  res.cookie('access_token', accessToken, accessTokenCookieOptions);
+
   return res.status(statusCode).json({
     type,
     message,
