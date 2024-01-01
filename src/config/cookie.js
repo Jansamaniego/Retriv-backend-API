@@ -19,5 +19,5 @@ export const loggedInCookieOptions = {
   httpOnly: false,
   sameSite: 'none',
   secure: true,
-  domain: config.client.url
+  domain: '.retriv.vercel.app'
 };
