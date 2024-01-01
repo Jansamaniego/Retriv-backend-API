@@ -43,7 +43,13 @@ app.use(mongoSanitize());
 
 // Implement CORS
 app.use(cookieParser());
-app.use(cors({ credentials: true, origin: config.client.url }));
+app.use(
+  cors({
+    credentials: true,
+    origin: true,
+    exposedHeaders: ['Set-Cookie']
+  })
+);
 
 console.log(config.client.url);
 
