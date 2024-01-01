@@ -103,7 +103,6 @@ export const signOut = catchAsync(async (req, res) => {
 
   res.clearCookie('access_token');
   res.clearCookie('refresh_token');
-  res.clearCookie('logged_in');
 
   return res.status(statusCode).json({
     type,
