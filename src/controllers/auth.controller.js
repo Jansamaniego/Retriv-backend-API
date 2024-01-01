@@ -29,6 +29,11 @@ export const signUp = catchAsync(async (req, res) => {
     });
   }
 
+  const { accessToken, refreshToken } = tokens;
+
+  res.cookie('access_token', accessToken, accessTokenCookieOptions);
+  res.cookie('refresh_token', refreshToken, refreshTokenCookieOptions);
+
   return res.status(statusCode).json({
     type,
     message,
@@ -51,6 +56,11 @@ export const signIn = catchAsync(async (req, res) => {
       message
     });
   }
+
+  const { accessToken, refreshToken } = tokens;
+
+  res.cookie('access_token', accessToken, accessTokenCookieOptions);
+  res.cookie('refresh_token', refreshToken, refreshTokenCookieOptions);
 
   return res.status(statusCode).json({
     type,
