@@ -83,7 +83,7 @@ export const googleCallback = catchAsync(async (req, res) => {
   res.cookie('refresh_token', refreshToken, refreshTokenCookieOptions);
   res.cookie('logged_in', true, {
     ...accessTokenCookieOptions,
-    httpOnly: false
+    domain: config.client.url
   });
 
   return res.redirect(config.client.url);
