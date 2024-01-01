@@ -86,7 +86,7 @@ export const googleCallback = catchAsync(async (req, res) => {
 
   console.log(config.client.url, 'yoooooo!');
 
-  return res.redirect(config.client.url);
+  return res.redirect(`${config.client.url}/?googleSignIn=${true}`);
 });
 
 export const signOut = catchAsync(async (req, res) => {

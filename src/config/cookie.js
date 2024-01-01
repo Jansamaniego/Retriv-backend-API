@@ -13,11 +13,3 @@ export const refreshTokenCookieOptions = {
   sameSite: 'none',
   secure: true
 };
-
-export const loggedInCookieOptions = {
-  maxAge: config.jwt.accessExpirationMinutes * 60 * 1000,
-  httpOnly: false,
-  sameSite: 'none',
-  secure: true,
-  domain: '.retriv.vercel.app'
-};
