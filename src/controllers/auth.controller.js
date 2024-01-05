@@ -82,7 +82,6 @@ export const googleCallback = catchAsync(async (req, res) => {
 
   res.cookie('access_token', accessToken, accessTokenCookieOptions);
   res.cookie('refresh_token', refreshToken, refreshTokenCookieOptions);
-  res.cookie('logged_in', true, loggedInCookieOptions);
 
   console.log(config.client.url, 'yoooooo!');
 

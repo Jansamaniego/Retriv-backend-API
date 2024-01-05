@@ -46,7 +46,7 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: config.client.url,
+    origin: [config.client.url, 'http://localhost:3000'],
     exposedHeaders: ['Set-Cookie']
   })
 );
